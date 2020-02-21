@@ -19,10 +19,6 @@ const App = () => {
   // const [page, setPage] = useState('')
   const [pageBool, setPageBool] = useState(false)
 
-  const cardHandler = () => {
-    {characters.map( (ele, index) => <Cards data={ele} key={index}/>)}
-  }
-
 
   const pageHandler = e => {
     setPageBool(true)
@@ -33,7 +29,7 @@ const App = () => {
 
   useEffect(() => {
     if(pageBool === false) {
-      axios(`https://swapi.co/api/people/`)
+      axios(`https://swapi.co/api/people/?page=1`)
       .then(response => {
         // console.log(response.data)
         // setData(response);
@@ -43,25 +39,41 @@ const App = () => {
       .catch(error =>
         console.error(`**Unable to retrieve data from SWAPI**`, error)
       );
-    } else if(pageBool === true) {
+    }
+     else if(pageBool === true) {
       axios(`${data.next}`)
       .then(response => {
         // console.log(response.data)
-        setData(response);
         setCharacters(response.data.results)
+        setData(response.data);
       })
       .catch(error =>
         console.error(`**Unable to retrieve data from SWAPI**`, error)
       );
     }
-  }, [data.next, pageBool]);
+  }, [pageBool]);
 
-  // console.log(characters);
+  // useEffect(() => {
+  //   if(pageBool === true) {
+  //     axios(data.next)
+  //     .then(response => {
+  //       // console.log(response.data)
+  //       setCharacters(response.data.results)
+  //       setData(response);
+  //     })
+  //     .catch(error =>
+  //       console.error(`**Unable to retrieve data from SWAPI**`, error)
+  //     );
+  //   }
+  // }, [pageBool])
+
+  console.log(data.next);
   // console.log(data);
   return (
     <div className="App">
       <Navi next={pageHandler} />
-        {characters.map( (ele, index) => <Cards data={ele} key={index}/>)}
+        {/* <button onClick={() => console.log(data)}></button> */}
+        {characters.map( (ele, index) => <Cards pageBool={pageBool} data={ele} key={index}/>)}
       {/* <MainContainer >
       </MainContainer> */}
     </div>

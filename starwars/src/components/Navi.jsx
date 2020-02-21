@@ -92,6 +92,7 @@ export default function Navi(props) {
                 input: classes.inputInput,
               }}
               inputProps={{ 'aria-label': 'search' }}
+              value=''
             />
           </div>
         </Toolbar>

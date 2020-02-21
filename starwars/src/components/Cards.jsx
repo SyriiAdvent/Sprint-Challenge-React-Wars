@@ -29,31 +29,32 @@ const useStyles = makeStyles({
 
 const Cards = (props, id) => {
   const classes = useStyles();
-  const [{ name, height, mass, birth_year, homeworld }] = useState(props.data);
+  // const [{ name, height, mass, birth_year, homeworld }, setData] = useState(props.data);
+  const [data, setData] = useState(props.data);
   const [currentData, setCurrentData] = useState(props.data)
   const [world, setWorld] = useState([])
 
   useEffect(() => {
-    axios(homeworld)
+    axios(data.homeworld)
     .then(response => {
       setWorld(response.data.name)
     })
     .catch(error => console.error(error))
-  }, [props.data])
+  }, [data])
 
-  console.log(world);
+  // console.log(world);
 
   return (
     <Card className={classes.root} variant="outlined" key={id}>
       <CardContent>
       <Typography variant="h6" component="h3" className={classes.title}>
-        {name}
+        {data.name}
       </Typography>
       <Typography variant="body2" component="p" className={classes.info}>
-        Height: {height} <br />
-        Mass: {mass} <br/>
-        Birth Year: {birth_year} <br />
-        Height: {height} <br />
+        Height: {data.height} <br />
+        Mass: {data.mass} <br/>
+        Birth Year: {data.birth_year} <br />
+        Height: {data.height} <br />
         Home World: {world} <br />
       </Typography>
       </CardContent>
