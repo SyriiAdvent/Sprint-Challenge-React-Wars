@@ -5,6 +5,9 @@ import Typography from '@material-ui/core/Typography';
 import InputBase from '@material-ui/core/InputBase';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
+import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -12,6 +15,7 @@ const useStyles = makeStyles(theme => ({
   },
   navi: {
     background: 'Black',
+    boxShadow: '0 3px 5px 2px rgba(255, 20, 52, .3)',
   },
   title: {
     fontFamily: 'Raleway',
@@ -22,6 +26,9 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.up('sm')]: {
       display: 'block',
     },
+  },
+  right: {
+    // fontSize: 25,
   },
   search: {
     position: 'relative',
@@ -63,7 +70,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function Navi() {
+export default function Navi(props) {
   const classes = useStyles();
 
   return (
@@ -73,6 +80,7 @@ export default function Navi() {
           <Typography className={classes.title} variant="h6" noWrap>
             React Wars
           </Typography>
+          <Button onClick={props.next} color="inherit" className={classes.right}>Next Page</Button>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
